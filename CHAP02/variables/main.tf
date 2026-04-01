@@ -2,13 +2,15 @@ terraform {
   required_version = "~> 1.0"
   required_providers {
     azurerm = {
-      version = "~> 3.18"
+      version = "~> 3.0"
+      # version = "~> 3.18"
     }
   }
 }
 
 provider "azurerm" {
   features {}
+  skip_provider_registration = true
 }
 
 variable "resource_group_name" {
@@ -18,11 +20,11 @@ variable "resource_group_name" {
 
 variable "location" {
   description = "The name of the Azure location"
-  default     = "westeurope"
+  default     = "australiaeast"
   type        = string
   validation {
-    condition     = contains(["westeurope", "westus"], var.location)
-    error_message = "The location must be westeurope or westus."
+    condition     = contains(["australiaeast", "indonesiacentral"], var.location)
+    error_message = "The location must be australiaeast or indonesiacentral."
   }
 }
 

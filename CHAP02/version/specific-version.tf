@@ -1,8 +1,8 @@
 terraform {
-  required_version = ">= 0.13,<=1"
+  required_version = ">= 0.13,<=2"
   required_providers {
     azurerm = {
-      version = "2.10.0" # not available on darwin/arm64
+      version = "~>3.0" # not available on darwin/arm64
     }
   }
 }
@@ -18,13 +18,14 @@ variable "resource_group_name" {
 
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
-  location = "westeurope"
+  location = "australiaeast"
 }
 
 resource "azurerm_public_ip" "pip" {
   name                         = "book-ip"
-  location                     = "westeurope"
+  location                     = "australiaeast"
   resource_group_name          = azurerm_resource_group.rg.name
-  allocation_method            = "Dynamic"
+  allocation_method            = "Static"
+  sku                          = "Standard"
   domain_name_label            = "bookdevops"
 }
